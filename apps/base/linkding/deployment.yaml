@@ -17,3 +17,10 @@ spec:
         name: linkding
         ports: 
           - containerPort: 9090
+      volumeMounts:
+          - mountPath: /app/data
+            name: linkding-data
+      volumes:
+        - name: linkding-data
+          persistentVolumeClaim: # PVC Claim in storage.yaml
+            claimName: linkding-data-pvc
