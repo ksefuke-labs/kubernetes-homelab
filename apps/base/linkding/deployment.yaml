@@ -12,11 +12,19 @@ spec:
       labels:
         app: linkding
     spec:
+      securityContext:
+        fsGroup: 82 # www-data group ID
+        runAsUser: 82 # www-data user ID
+        runAsGroup: 82 # www-data group ID
+
       containers:
       - image: ghcr.io/sissbruecker/linkding:1.44.2-plus-alpine
         name: linkding
         ports: 
           - containerPort: 9090
+
+        securityContext:
+            allowPrivilegeEscalation: false
         
         volumeMounts:
           - mountPath: /etc/linkding/data
