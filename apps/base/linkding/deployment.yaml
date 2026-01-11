@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkding
+spec:
+  replicas: 1 #Default DB doesn't support concurrent write from multiple instances. Might try PSQL later
+  selector:
+    matchLabels:
+      app: linkding
+  template:
+    metadata:
+      labels:
+        app: linkding
+    spec:
+      containers:
+      - image: ghcr.io/sissbruecker/linkding:1.44.2-plus-alpine
+        name: linkding
+        ports: 
+          - containerPort: 9090
