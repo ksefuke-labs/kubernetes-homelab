@@ -20,12 +20,16 @@ spec:
       containers:
       - image: ghcr.io/sissbruecker/linkding:1.44.2-plus-alpine
         name: linkding
+        envFrom:
+         # - configMapRef:
+         #     name: linkding-configmap
+          - secretRef:
+              name: linkding-container-env
+
         ports: 
           - containerPort: 9090
-
         securityContext:
             allowPrivilegeEscalation: false
-        
         volumeMounts:
           - mountPath: /etc/linkding/data
             name: linkding-data

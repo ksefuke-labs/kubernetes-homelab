@@ -11,7 +11,7 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./apps/staging
-  prune: true
+  prune: true # FLUX will cleanup resources which have been removed from kustomize file in apps/staging
 
   decryption:
     provider: sops
