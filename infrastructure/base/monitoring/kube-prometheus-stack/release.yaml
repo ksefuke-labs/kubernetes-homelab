@@ -33,12 +33,7 @@ spec:
      #Will change and encrypt later
       adminPassword: password123
     ingress:
-      ## If true, Grafana Ingress will be created
-      ##
-      enabled: true
-
-      ## IngressClassName for Grafana Ingress.
-      ## Should be provided if Ingress is enable.
+      enabled: true.
       ingressClassName: traefik
       #annotations: {} - Potentially needed by cert manager
       # kubernetes.io/ingress.class: nginx
@@ -50,7 +45,7 @@ spec:
 
       ## TLS configuration for grafana Ingress
       ## Secret must be manually created in the namespace
-      #tls:
-      # - secretName: grafana-general-tls
-      #   hosts:
-      #   - grfs.ksefuke-labs.com
+      tls:
+       - secretName: grafana-tls-secret
+         hosts:
+         - grfs.ksefuke-labs.com
