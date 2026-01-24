@@ -4,3 +4,4 @@ resources:
   - namespace.yaml
   - repository.yaml
   - release.yaml
+  - grafana-tls-secret.yaml
