@@ -5,6 +5,8 @@ metadata:
 spec:
   ports:
     - port: 13378
+      targetPort: 80
+      protocol: TCP
   selector:
     app: audiobookshelf
   type: ClusterIP
