@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audiobookshelf
+spec:
+  replicas: 1 #Default DB doesn't support concurrent write from multiple instances. Might try PSQL later
+  selector:
+    matchLabels:
+      app: audiobookshelf
+  template:
+    metadata:
+      labels:
+        app: audiobookshelf
+    spec:
+      #securityContext:
+      #  fsGroup: 82 # www-data group ID
+      #  runAsUser: 82 # www-data user ID
+      #  runAsGroup: 82 # www-data group ID
+
+      containers:
+      - image: ghcr.io/advplyr/audiobookshelf:latest
+        name: audiobookshelf
+        #envFrom:
+         # - configMapRef:
+         #     name: linkding-configmap
+        #  - secretRef:
+        #      name: linkding-container-env
+
+        ports: 
+          - containerPort: 13378
+        #securityContext:
+        #    allowPrivilegeEscalation: false
+        volumeMounts:
+          - mountPath: /audiobooks
+            name: abs-audiobooks
+
+          - mountPath: /config
+            name: abs-config
+
+          - mountPath: /metadata
+            name: abs-metadata
+
+          - mountPath: /podcasts
+            name: abs-podcasts
+      
+      volumes:
+        - name: abs-audiobooks
+          persistentVolumeClaim: # PVC Claim in storage.yaml
+            claimName: abs-audiobooks-pvc
+        
+        - name: abs-config
+          persistentVolumeClaim: # PVC Claim in storage.yaml
+            claimName: abs-config-pvc
+
+        - name: abs-metadata
+          persistentVolumeClaim: # PVC Claim in storage.yaml
+            claimName: abs-metadata-pvc
+
+        - name: abs-podcasts
+          persistentVolumeClaim: # PVC Claim in storage.yaml
+            claimName: abs-podcasts-pvc
