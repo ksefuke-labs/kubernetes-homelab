@@ -14,10 +14,10 @@ spec:
       labels:
         app: audiobookshelf
     spec:
-      #securityContext:
-      #  fsGroup: 1000 # www-data group ID
-      #  runAsUser: 1000 # www-data user ID
-      #  runAsGroup: 1000 # www-data group ID
+      securityContext:
+        fsGroup: 1000 # www-data group ID
+        runAsUser: 1000 # www-data user ID
+        runAsGroup: 1000 # www-data group ID
 
       containers:
       - image: ghcr.io/advplyr/audiobookshelf:2.17.2
@@ -29,8 +29,8 @@ spec:
         ports: 
           - containerPort: 3005
             protocol: TCP
-        #securityContext:
-        #    allowPrivilegeEscalation: false
+        securityContext:
+            allowPrivilegeEscalation: false
         volumeMounts:
           - mountPath: /config
             name: abs-config
