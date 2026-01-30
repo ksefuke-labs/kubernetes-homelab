@@ -2,60 +2,57 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: audiobookshelf
+
 spec:
-  replicas: 1 #Default DB doesn't support concurrent write from multiple instances. Might try PSQL later
+  replicas: 1
   selector:
     matchLabels:
       app: audiobookshelf
+  
   template:
     metadata:
       labels:
         app: audiobookshelf
     spec:
       #securityContext:
-      #  fsGroup: 82 # www-data group ID
-      #  runAsUser: 82 # www-data user ID
-      #  runAsGroup: 82 # www-data group ID
+      #  fsGroup: 1000 # www-data group ID
+      #  runAsUser: 1000 # www-data user ID
+      #  runAsGroup: 1000 # www-data group ID
 
       containers:
-      - image: ghcr.io/advplyr/audiobookshelf:latest
+      - image: ghcr.io/advplyr/audiobookshelf:2.17.2
         name: audiobookshelf
-        #envFrom:
-         # - configMapRef:
-         #     name: linkding-configmap
-        #  - secretRef:
-        #      name: linkding-container-env
+        envFrom:
+          - configMapRef:
+              name: abs-configmap
 
         ports: 
-          - containerPort: 13378
+          - containerPort: 3005
+            protocol: TCP
         #securityContext:
         #    allowPrivilegeEscalation: false
         volumeMounts:
-          - mountPath: /audiobooks
-            name: abs-audiobooks
-
           - mountPath: /config
             name: abs-config
 
+          - mountPath: /audiobooks
+            name: abs-audiobooks
+
           - mountPath: /metadata
             name: abs-metadata
-
-          - mountPath: /podcasts
-            name: abs-podcasts
-      
+          
+      restartPolicy: Always
       volumes:
-        - name: abs-audiobooks
-          persistentVolumeClaim: # PVC Claim in storage.yaml
-            claimName: abs-audiobooks-pvc
-        
         - name: abs-config
           persistentVolumeClaim: # PVC Claim in storage.yaml
             claimName: abs-config-pvc
+
+        - name: abs-audiobooks
+          persistentVolumeClaim: # PVC Claim in storage.yaml
+            claimName: abs-audiobooks-pvc
 
         - name: abs-metadata
           persistentVolumeClaim: # PVC Claim in storage.yaml
             claimName: abs-metadata-pvc
 
-        - name: abs-podcasts
-          persistentVolumeClaim: # PVC Claim in storage.yaml
-            claimName: abs-podcasts-pvc
+        

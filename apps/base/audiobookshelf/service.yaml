@@ -4,8 +4,7 @@ metadata:
   name: audiobookshelf-svc
 spec:
   ports:
-    - port: 13378
-      targetPort: 80
+    - port: 3005
       protocol: TCP
   selector:
     app: audiobookshelf
