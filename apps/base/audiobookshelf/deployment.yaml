@@ -20,7 +20,7 @@ spec:
         runAsGroup: 1000 # www-data group ID
 
       containers:
-      - image: ghcr.io/advplyr/audiobookshelf:2.17.2
+      - image: ghcr.io/advplyr/audiobookshelf:2.32.1
         name: audiobookshelf
         envFrom:
           - configMapRef:
