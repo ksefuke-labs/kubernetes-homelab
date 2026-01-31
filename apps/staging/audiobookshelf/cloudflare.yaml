@@ -39,7 +39,7 @@ spec:
       volumes:
       - name: creds
         secret:
-          secretName: tunnel-credentials
+          secretName: abs-tunnel-credentials
 
       # Create a config.yaml file from the ConfigMap below.
       - name: config
@@ -59,7 +59,7 @@ data:
   config.yaml: |
     # Name of the tunnel you want to run
     
-    tunnel: ld
+    tunnel: abs
 
     credentials-file: /etc/cloudflared/creds/credentials.json
 
@@ -68,8 +68,8 @@ data:
     no-autoupdate: true
 
     ingress:
-    - hostname: ld.ksefuke-labs.com
-      service: http://linkding:9090
+    - hostname: abs.ksefuke-labs.com
+      service: http://audiobookshelf:3005
 
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
     # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
