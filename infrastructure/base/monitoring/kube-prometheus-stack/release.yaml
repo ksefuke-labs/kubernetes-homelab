@@ -28,9 +28,9 @@ spec:
           kind: PrometheusRule
   values:
     grafana:
-     #Will change and encrypt later
-      existingSecret: "grafana-admin-credentials"
-      passwordKey: "admin-password"
+      admin:
+        existingSecret: "grafana-admin-credentials"
+        passwordKey: "admin-password"
       ingress:
         enabled: true
         ingressClassName: traefik
