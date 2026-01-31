@@ -29,7 +29,8 @@ spec:
   values:
     grafana:
      #Will change and encrypt later
-      adminPassword: password123
+      existingSecret: "grafana-admin-credentials"
+      passwordKey: "admin-password"
       ingress:
         enabled: true
         ingressClassName: traefik
