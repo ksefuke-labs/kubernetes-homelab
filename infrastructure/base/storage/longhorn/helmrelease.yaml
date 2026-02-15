@@ -16,4 +16,13 @@ spec:
         name: longhorn-repo
       version: v1.11.0
   values:
-    
+    defaultSettings:
+      defaultDataPath: /var/lib/longhorn/
+      defaultReplicaCount: "v1":"2"
+        # -- Default number of replicas for volumes created using the Longhorn UI. For Kubernetes configuration, modify the `numberOfReplicas` field in the StorageClass. The default value is "{"v1":"3","v2":"3"}".
+    persistence:
+      defaultClassReplicaCount: 2
+      defaultDataLocality: disabled
+      # -- Data locality of the default Longhorn StorageClass. (Options: "disabled", "best-effort")
+      reclaimPolicy: Retain
+      # -- Reclaim policy that provides instructions for handling of a volume after its claim is released. (Options: "Retain", "Delete")
