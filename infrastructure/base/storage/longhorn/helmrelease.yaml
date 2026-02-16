@@ -17,7 +17,7 @@ spec:
       version: v1.11.0
   values:
     defaultSettings:
-      defaultDataPath: /var/mnt/longhorn/
+      defaultDataPath: /var/mnt/longhorn
       defaultReplicaCount: 2
         # -- Default number of replicas for volumes created using the Longhorn UI. For Kubernetes configuration, modify the `numberOfReplicas` field in the StorageClass. The default value is "{"v1":"3","v2":"3"}".
     persistence:
