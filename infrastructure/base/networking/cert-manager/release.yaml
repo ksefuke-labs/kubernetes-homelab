@@ -1,0 +1,19 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  interval: 30m
+  chart: cert-manager
+  reconcileStrategy: ChartVersion
+  sourceRef:
+    kind: HelmRepository
+    name: cert-manager
+  version: '1.19.3'
+values:
+  global:
+    crds:
+  # This option decides if the CRDs should be installed
+  # as part of the Helm installation.
+      enabled: true

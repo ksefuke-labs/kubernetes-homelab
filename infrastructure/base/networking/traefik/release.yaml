@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  interval: 12h
+  chart:
+    spec:
+      chart: traefik
+      version: "39.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: traefik
+  values:
+    deployment:
+       # -- Number of pods of the deployment (only applies when kind == Deployment)
+      replicas: 1
+    api:  # @schema additionalProperties: false
+      # -- Enable the dashboard
+      dashboard: true
+      # -- Enable the insecure API (HTTP)
+      insecure:  # @schema type:[boolean, null]
+      # -- Enable the debug API
+      debug:  # @schema type:[boolean, null]
+      # -- Configure API basePath
+      basePath: ""  # @schema type:[string, null]; default: "/"
+    ingressRoute:
+      dashboard:
+        # -- Create an IngressRoute for the dashboard
+        enabled: false
+        # -- Additional ingressRoute annotations (e.g. for kubernetes.io/ingress.class)
+        annotations: {}
+        # -- Additional ingressRoute labels (e.g. for filtering IngressRoute by custom labels)
+        labels: {}
+        # -- The router match rule used for the dashboard ingressRoute
+        matchRule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+        # -- The internal service used for the dashboard ingressRoute
+        # @default -- api@internal
+        services:
+          - name: api@internal
+            kind: TraefikService
+        # -- Specify the allowed entrypoints to use for the dashboard ingress route, (e.g. traefik, web, websecure).
+        # By default, it's using traefik entrypoint, which is not exposed.
+        # /!\ Do not expose your dashboard without any protection over the internet /!\
+        entryPoints: ["traefik"]
+        # -- Additional ingressRoute middlewares (e.g. for authentication)
+        middlewares: []
+        # -- TLS options (e.g. secret containing certificate)
+        tls: {}
+    updateStrategy:  # @schema additionalProperties: false
+      # -- Customize updateStrategy of Deployment or DaemonSet
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 0  # @schema type:[integer, string, null]
+        maxSurge: 1        # @schema type:[integer, string, null]
