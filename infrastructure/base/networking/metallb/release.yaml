@@ -13,7 +13,6 @@ spec:
         kind: HelmRepository
         name: metallb
         namespace: metallb-system
-  targetNamespace: metallb-system
   install:
     createNamespace: false
     crds: CreateReplace
