@@ -44,7 +44,7 @@ The cluster needs to meet the following requirements to be considered feature co
 | **Einherjar** | Cachy OS | Local Development & Testing | CPU: Ryzen 9 7950x3D (16C/32T)<br>RAM: 32GB DDR5<br>Storage: 2TB NVMe |
 | **Hlidskjalf** | OPNsense 26 | Firewall/Router — DDNS, DNS, HAProxy, IDS/IPS, NTP ([details](https://www.ksefuke-labs.com/articles/enterprise-grade-firewall-router/)) | CPU: Celeron N5105 (4C/4T)<br>RAM: 16GB<br>Storage: 2 × 500GB NVMe |
 | **Jotunheim** | PVE 9 | Proxmox — virtual NAS, Docker & self-hosted services ([details](https://www.ksefuke-labs.com/articles/state-of-homelab-2026/)) | CPU: i5-14500 (14C/20T)<br>RAM: 64GB DDR4<br>Storage: 2TB NVMe + 960GB SSD |
-| **Huginn / Muninn** | PVE 9 | Proxmox — Talos Linux nodes | CPU: Celeron N100 (4C/4T)<br>RAM: 16GB<br>Storage: 1TB NVMe + 1.92TB SSD |
+| **Ratotaskr / Lindwyrm** | PVE 9 | Proxmox — Talos Linux nodes | CPU: Celeron N100 (4C/4T)<br>RAM: 16GB<br>Storage: 1TB NVMe + 1.92TB SSD |
 
 ---
 
