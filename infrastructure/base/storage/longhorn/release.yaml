@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -17,15 +16,24 @@ spec:
       version: v1.11.0
   values:
     defaultSettings:
+      # -- Percentage of minimum available disk capacity. When the minimum available capacity exceeds the total available capacity, the disk becomes unschedulable until more space is made available for use. The default value is "25".
+      storageMinimalAvailablePercentage: "20"
+      # -- Percentage of disk space that is not allocated to the default disk on each new Longhorn node.
+      storageReservedPercentageForDefaultDisk: "10"
       defaultDataPath: /var/mnt/longhorn
       defaultReplicaCount: 2
         # -- Default number of replicas for volumes created using the Longhorn UI. For Kubernetes configuration, modify the `numberOfReplicas` field in the StorageClass. The default value is "{"v1":"3","v2":"3"}".
     defaultBackupStore:
         # -- Endpoint used to access the default backupstore. (Options: "NFS", "CIFS", "AWS", "GCP", "AZURE")
-      backupTarget: nfs://openmediavault.internal:/longhorn-prod
+      backupTarget: nfs://openmediavault.internal:/longhorn-staging
     persistence:
+      # -- Setting that allows you to specify the default Longhorn StorageClass.
+      defaultClass: true
+      # -- Filesystem type of the default Longhorn StorageClass.
+      defaultFsType: xfs
       defaultClassReplicaCount: 2
-      defaultDataLocality: disabled
+       # -- Data locality of the default Longhorn StorageClass. (Options: "disabled", "best-effort")
+      defaultDataLocality: best-effort
       # -- Data locality of the default Longhorn StorageClass. (Options: "disabled", "best-effort")
       reclaimPolicy: Retain
       # -- Reclaim policy that provides instructions for handling of a volume after its claim is released. (Options: "Retain", "Delete")
