@@ -15,6 +15,9 @@
 
 ---
 
+<img width="1920" height="1080" alt="homelab-diagram" src="https://github.com/user-attachments/assets/52bf19ec-2426-4d95-912d-d530a2dcc579" />
+
+
 ## 📋 Overview
 
 The goal of this megaproject is to deploy a production-level Kubernetes cluster and migrate my existing stack of Docker services to Kubernetes.
@@ -44,7 +47,7 @@ The cluster needs to meet the following requirements to be considered feature co
 | **Einherjar** | Cachy OS | Local Development & Testing | CPU: Ryzen 9 7950x3D (16C/32T)<br>RAM: 32GB DDR5<br>Storage: 2TB NVMe |
 | **Hlidskjalf** | OPNsense 26 | Firewall/Router — DDNS, DNS, HAProxy, IDS/IPS, NTP ([details](https://www.ksefuke-labs.com/articles/enterprise-grade-firewall-router/)) | CPU: Celeron N5105 (4C/4T)<br>RAM: 16GB<br>Storage: 2 × 500GB NVMe |
 | **Jotunheim** | PVE 9 | Proxmox — virtual NAS, Docker & self-hosted services ([details](https://www.ksefuke-labs.com/articles/state-of-homelab-2026/)) | CPU: i5-14500 (14C/20T)<br>RAM: 64GB DDR4<br>Storage: 2TB NVMe + 960GB SSD |
-| **Ratotaskr / Lindwyrm** | PVE 9 | Proxmox — Talos Linux nodes | CPU: Celeron N100 (4C/4T)<br>RAM: 16GB<br>Storage: 1TB NVMe + 1.92TB SSD |
+| **Huginn / Muninn** | PVE 9 | Proxmox — Talos Linux nodes | CPU: Celeron N100 (4C/4T)<br>RAM: 16GB<br>Storage: 1TB NVMe + 1.92TB SSD |
 
 ---
 
@@ -71,11 +74,9 @@ Powered by **[Talos Linux](https://www.talos.dev)**, managed with **[FluxCD](htt
 
 - **3 Control Plane nodes** + **Worker Nodes** — 1 of each deployed across **Jotunheim**, **Huginn**, and **Muninn**
 - Control plane load balanced via **HAProxy** on OPNsense router **Hlidskjalf**
-- Points to: `clusters/production`, `apps/production`, `infrastructure/production`
+- Will point to: `clusters/production`, `apps/production`, `infrastructure/production`
 
 > ⚠️ Configuration is still in progress.
-
-<img width="1067" height="691" alt="image" src="https://github.com/user-attachments/assets/9b5171fd-c86d-4c22-8be6-35976d6f0f28" />
 
 ---
 
@@ -83,6 +84,7 @@ Powered by **[Talos Linux](https://www.talos.dev)**, managed with **[FluxCD](htt
 
 | Category | Components |
 |---|---|
+| 📑 **Documentation | Detailed Documentation on Configuration, Storage, Networking, Security, observability and Applications |
 | 📊 **Monitoring** | [Kube Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) |
 | 🔧 **Maintenance** | [Renovate](https://github.com/renovatebot/renovate) for dependency updates |
 | 🌐 **Networking** | Flannel (CNI), MetalLB, Traefik Ingress, Cloudflare Tunnels, cert-manager |
