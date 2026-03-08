@@ -13,45 +13,72 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: traefik
+      interval: 1h
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  
   values:
     deployment:
+      # -- Enable deployment
+      enabled: true
+      # -- Deployment or DaemonSet
+      kind: Deployment
        # -- Number of pods of the deployment (only applies when kind == Deployment)
       replicas: 1
-    api:  # @schema additionalProperties: false
-      # -- Enable the dashboard
-      dashboard: true
-      # -- Enable the insecure API (HTTP)
-      insecure:  # @schema type:[boolean, null]
-      # -- Enable the debug API
-      debug:  # @schema type:[boolean, null]
-      # -- Configure API basePath
-      basePath: ""  # @schema type:[string, null]; default: "/"
+    
+    resources:
+      requests:
+        cpu: 200m
+        memory: 128Mi
+      limits:
+        cpu: 1000m
+        memory: 512Mi
+
+    ports:
+      # HTTP entrypoint
+      web:
+        port: 8000
+        exposedPort: 80
+        protocol: TCP
+        # Redirect HTTP to HTTPS
+        redirectTo:
+          port: websecure
+          priority: 10
+
+      # HTTPS entrypoint
+      websecure:
+        port: 8443
+        exposedPort: 443
+        protocol: TCP
+        tls:
+          enabled: true
+
+    providers:
+      # Enable Kubernetes CRD provider
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+      # Enable Kubernetes Ingress provider
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
+    
+    service:
+      enabled: true
+      type: LoadBalancer
+      spec:
+        loadBalancerIP: 10.52.100.61
+
     ingressRoute:
       dashboard:
-        # -- Create an IngressRoute for the dashboard
-        enabled: false
-        # -- Additional ingressRoute annotations (e.g. for kubernetes.io/ingress.class)
-        annotations: {}
-        # -- Additional ingressRoute labels (e.g. for filtering IngressRoute by custom labels)
-        labels: {}
-        # -- The router match rule used for the dashboard ingressRoute
-        matchRule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
-        # -- The internal service used for the dashboard ingressRoute
-        # @default -- api@internal
-        services:
-          - name: api@internal
-            kind: TraefikService
-        # -- Specify the allowed entrypoints to use for the dashboard ingress route, (e.g. traefik, web, websecure).
-        # By default, it's using traefik entrypoint, which is not exposed.
-        # /!\ Do not expose your dashboard without any protection over the internet /!\
-        entryPoints: ["traefik"]
-        # -- Additional ingressRoute middlewares (e.g. for authentication)
-        middlewares: []
-        # -- TLS options (e.g. secret containing certificate)
-        tls: {}
-    updateStrategy:  # @schema additionalProperties: false
-      # -- Customize updateStrategy of Deployment or DaemonSet
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 0  # @schema type:[integer, string, null]
-        maxSurge: 1        # @schema type:[integer, string, null]
+        enabled: true
+        matchRule: Host(`traefik.internal.`)
+        entryPoints:
+          - web
+
