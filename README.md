@@ -84,7 +84,7 @@ Powered by **[Talos Linux](https://www.talos.dev)**, managed with **[FluxCD](htt
 
 | Category | Components |
 |---|---|
-| 📑 **Documentation | Detailed Documentation on Configuration, Storage, Networking, Security, observability and Applications |
+| 📑 **Documentation** | Detailed Documentation on Configuration, Storage, Networking, Security, observability and Applications |
 | 📊 **Monitoring** | [Kube Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) |
 | 🔧 **Maintenance** | [Renovate](https://github.com/renovatebot/renovate) for dependency updates |
 | 🌐 **Networking** | Flannel (CNI), MetalLB, Traefik Ingress, Cloudflare Tunnels, cert-manager |
