@@ -13,3 +13,5 @@ spec:
     - name: audiobookshelf
       namespace: audiobookshelf
       port: 3005
+  tls:
+    secretName: abs-cert-secret

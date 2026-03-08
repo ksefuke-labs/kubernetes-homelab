@@ -5,4 +5,4 @@ resources:
   - ../../base/audiobookshelf/
   #- cloudflare.yaml
   #- cloudflare-secret.yaml
-  - ingress-route.yaml
+  - ingress-route-staging.yaml
