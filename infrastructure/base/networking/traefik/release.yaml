@@ -40,22 +40,21 @@ spec:
         memory: 512Mi
 
     ports:
-      # HTTP entrypoint
-      web:
-        port: 8000
-        exposedPort: 80
-        protocol: TCP
-        # Redirect HTTP to HTTPS
-        redirections:
-          entryPoints:
-            to: websecure
-            permanent: true
+        web:
+          port: 8000
+          exposedPort: 80
+          protocol: TCP
+          http:
+            redirections:
+              entryPoint:
+                to: websecure
+                scheme: https
+                permanent: true
 
-      # HTTPS entrypoint
-      websecure:
-        port: 8443
-        exposedPort: 443
-        protocol: TCP
+        websecure:
+          port: 8443
+          exposedPort: 443
+          protocol: TCP
 
     providers:
       # Enable Kubernetes CRD provider
@@ -80,4 +79,3 @@ spec:
         matchRule: Host(`traefik.internal.`)
         entryPoints:
           - web
-
