@@ -15,6 +15,9 @@
 
 ---
 
+<img width="1920" height="1080" alt="homelab-diagram" src="https://github.com/user-attachments/assets/52bf19ec-2426-4d95-912d-d530a2dcc579" />
+
+
 ## 📋 Overview
 
 The goal of this megaproject is to deploy a production-level Kubernetes cluster and migrate my existing stack of Docker services to Kubernetes.
@@ -71,11 +74,9 @@ Powered by **[Talos Linux](https://www.talos.dev)**, managed with **[FluxCD](htt
 
 - **3 Control Plane nodes** + **Worker Nodes** — 1 of each deployed across **Jotunheim**, **Huginn**, and **Muninn**
 - Control plane load balanced via **HAProxy** on OPNsense router **Hlidskjalf**
-- Points to: `clusters/production`, `apps/production`, `infrastructure/production`
+- Will point to: `clusters/production`, `apps/production`, `infrastructure/production`
 
 > ⚠️ Configuration is still in progress.
-
-![Cluster Diagram](assets/cluster-diagram.png)
 
 ---
 
@@ -83,6 +84,7 @@ Powered by **[Talos Linux](https://www.talos.dev)**, managed with **[FluxCD](htt
 
 | Category | Components |
 |---|---|
+| 📑 **Documentation | Detailed Documentation on Configuration, Storage, Networking, Security, observability and Applications |
 | 📊 **Monitoring** | [Kube Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) |
 | 🔧 **Maintenance** | [Renovate](https://github.com/renovatebot/renovate) for dependency updates |
 | 🌐 **Networking** | Flannel (CNI), MetalLB, Traefik Ingress, Cloudflare Tunnels, cert-manager |
