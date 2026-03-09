@@ -12,6 +12,6 @@ spec:
     - dns01:
         cloudflare:
           email: ksefuke@protonmail.com
-          apiKeySecretRef:
+          apiTokenSecretRef:
             name: cloudflare-apikey-secret
             key: apikey
