@@ -4,3 +4,5 @@ resources:
   - namespace.yaml
   - release.yaml
   - repository.yaml
+  - cluster-issuer-staging.yaml
+  - secret.yaml
