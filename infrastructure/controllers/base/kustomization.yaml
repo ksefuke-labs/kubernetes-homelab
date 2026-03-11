@@ -7,5 +7,6 @@ resources:
   - ./metallb
   - ./reflector
   - ./renovate
+  - ./reloader
   - ./traefik
   
