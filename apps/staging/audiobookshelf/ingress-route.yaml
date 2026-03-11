@@ -14,4 +14,4 @@ spec:
       namespace: audiobookshelf
       port: 3005
   tls:
-    secretName: abs-cert-secret
+    secretName: staging-ksefuke-labs-tls

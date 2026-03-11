@@ -5,6 +5,7 @@ resources:
   - ./kube-prometheus-stack
   - ./longhorn
   - ./metallb
+  - ./reflector
   - ./renovate
   - ./traefik
   

@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-cert-staging
+  namespace: cert-manager
+spec:
+  secretName: staging-ksefuke-labs-tls
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "staging.ksefuke-labs.com"
+    - "*.staging.ksefuke-labs.com"
+    - "stg.ksefuke-labs.com"
+    - "*.stg.ksefuke-labs.com"
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: ".*"
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "audiobookshelf,monitoring,linkding,longhorn-system,traefik"

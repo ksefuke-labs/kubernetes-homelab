@@ -4,3 +4,4 @@ resources:
   - cloudflare-api-secret.yaml
   - letsencrypt-production.yaml
   - letsencrypt-staging.yaml
+  - wildcard-cert-staging.yaml

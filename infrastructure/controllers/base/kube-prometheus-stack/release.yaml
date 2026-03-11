@@ -4,11 +4,9 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
-  interval: 30m
   chart:
     spec:
       chart: kube-prometheus-stack
-      #version: "66.2.2"
       version: "81.2.2"
       sourceRef:
         kind: HelmRepository
@@ -41,11 +39,11 @@ spec:
 
       ## Hostnames.Must be provided if Ingress is enable.
         hosts:
-          - grfs.ksefuke-labs.com
+          - grfs.staging.ksefuke-labs.com
 
       ## TLS configuration for grafana Ingress
       ## Secret must be manually created in the namespace
         tls:
-          - secretName: grafana-tls-secret
+          - secretName: staging-ksefuke-labs-tls
             hosts:
-              - grfs.ksefuke-labs.com
+              - grfs.staging.ksefuke-labs.com

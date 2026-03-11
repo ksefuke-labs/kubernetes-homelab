@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: audiobookshelf
 resources:
   - ../../base/audiobookshelf/
-  - abs-certificate.yaml
   #- cloudflare.yaml
   #- cloudflare-secret.yaml
-  - ingress-route-staging.yaml
+  - ingress-route.yaml
