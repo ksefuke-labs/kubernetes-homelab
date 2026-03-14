@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: excalidraw
+  namespace: excalidraw
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - kind: Rule
+    match: Host(`excal.staging.ksefuke-labs.com`)
+    services:
+    - name: excalidraw
+      namespace: excalidraw
+      port: 80
+  tls:
+    secretName: staging-ksefuke-labs-tls
