@@ -707,7 +707,7 @@ agent:
       pullPolicy: IfNotPresent
       # -- docker image tag
       ## @param agent.wait_for_lapi.image.tag [string] Image tag for the wait-for-lapi init container
-      tag: "1.28"
+      tag: "1.37"
     # -- Container securityContext
     ## @param agent.wait_for_lapi.securityContext [object] Security context for the wait-for-lapi init container
     securityContext:
@@ -936,7 +936,7 @@ appsec:
       pullPolicy: IfNotPresent
       # -- docker image tag
       ## @param appsec.wait_for_lapi.image.tag Image tag for the wait-for-lapi init container
-      tag: "1.28"
+      tag: "1.37"
     # -- Container securityContext
     ## @param appsec.wait_for_lapi.securityContext [object] Security context for the wait-for-lapi init container
     securityContext:
